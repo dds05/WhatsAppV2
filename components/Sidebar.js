@@ -64,7 +64,7 @@ function Sidebar() {
             </SidebarButton>
 
             {/*Chatlist*/}
-            {chatsSnapshot?.docs.map((chat)=>(
+            {chatsSnapshot?.docs?.map((chat)=>(
                 <Chat key={chat.id} id={chat.id} users={chat.data().users}/>
             ))}
 

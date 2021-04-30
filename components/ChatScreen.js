@@ -8,7 +8,7 @@ import AttachFileIcon from '@material-ui/icons/AttachFile';
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon'
 import {useCollection} from 'react-firebase-hooks/firestore';
 import MicIcon from '@material-ui/icons/Mic';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import firebase from 'firebase';
 import Message from './Message';
 import getRecipientEmail from '../utils/getRecipientEmail';
@@ -60,6 +60,10 @@ function ChatScreen({chat,messages}) {
         .orderBy('timestamp','asc')
         
     )
+
+    useEffect(()=>{
+        ScrollToBottom();
+    },[messagesSnapshot])
     
     
 
@@ -74,8 +78,9 @@ function ChatScreen({chat,messages}) {
                  timestamp: message.data().timestamp?.toDate().getTime()
              }}
              />
+
         ))
-    }
+        }
     else{
         return JSON.parse(messages).map(message=>(
             <Message key={message.id} user={message.user}
